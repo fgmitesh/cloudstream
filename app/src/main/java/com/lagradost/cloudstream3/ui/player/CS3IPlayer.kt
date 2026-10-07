@@ -1127,7 +1127,21 @@ class CS3IPlayer : IPlayer {
                         context.getString(R.string.compressor_enabled_key),
                         false
                     )
-                    compressor = if (isCompressorEnabled) DynamicRangeCompressor() else null
+                    // Restore ALL persisted compressor state right here, at creation time.
+                    // This is the only place guaranteed to run for every single video (unlike
+                    // FullScreenPlayer's onBindingCreated, which only fires once per player
+                    // session and can race the compressor's own creation) — so the user's
+                    // saved on/off + parameters apply immediately, with zero UI interaction.
+                    compressor = if (isCompressorEnabled) {
+                        DynamicRangeCompressor().apply {
+                            enabled    = getKey("player_compressor_enabled")   ?: false
+                            threshold  = getKey("player_compressor_threshold") ?: -24f
+                            ratio      = getKey("player_compressor_ratio")     ?: 8f
+                            attackMs   = getKey("player_compressor_attack")    ?: 5f
+                            releaseMs  = getKey("player_compressor_release")   ?: 400f
+                            makeupGain = getKey("player_compressor_makeup")    ?: 12f
+                        }
+                    } else null
 
                     val factory = if (isSoftwareDecodingEnabled) {
                         FixedNextRenderersFactory(context, compressor).apply {
