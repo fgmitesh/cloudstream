@@ -737,18 +737,6 @@ open class FullScreenPlayer : AbstractPlayerFragment<FragmentPlayerBinding>(
             .inflate(android.view.LayoutInflater.from(act))
 
         // ── Visual update helpers ──────────────────────────────────────────
-        fun updateCurrentLabel() {
-            binding.compressorCurrentLabel.text = if (compressor.enabled) {
-                act.getString(
-                    R.string.compressor_on_format,
-                    compressor.threshold.toInt(),
-                    compressor.makeupGain.toInt()
-                )
-            } else {
-                act.getString(R.string.compressor_off)
-            }
-        }
-
         fun updateThresholdLabel() {
             binding.compressorThresholdLabel.text =
                 act.getString(R.string.compressor_threshold_label, compressor.threshold.toInt())
@@ -792,7 +780,6 @@ open class FullScreenPlayer : AbstractPlayerFragment<FragmentPlayerBinding>(
                 ta.getColorStateList(1)?.let { btn.setTextColor(it) }
                 ta.recycle()
             }
-            updateCurrentLabel()
         }
 
         // ── Presets — declared before the sliders so their listeners can call
@@ -843,7 +830,6 @@ open class FullScreenPlayer : AbstractPlayerFragment<FragmentPlayerBinding>(
             updateMakeupLabel()
             updateThresholdHint()
             updateMakeupHint()
-            updateCurrentLabel()
             syncPresetButtons(activeBtn)
         }
 
@@ -873,7 +859,6 @@ open class FullScreenPlayer : AbstractPlayerFragment<FragmentPlayerBinding>(
                 compressor.threshold = value
                 updateThresholdLabel()
                 updateThresholdHint()
-                updateCurrentLabel()
                 syncPresetButtons(matchingPresetButton())
             }
         }
@@ -883,7 +868,6 @@ open class FullScreenPlayer : AbstractPlayerFragment<FragmentPlayerBinding>(
             binding.compressorThresholdBar.value = v
             updateThresholdLabel()
             updateThresholdHint()
-            updateCurrentLabel()
             syncPresetButtons(matchingPresetButton())
         }
         binding.thresholdPlus.setOnClickListener {
@@ -892,7 +876,6 @@ open class FullScreenPlayer : AbstractPlayerFragment<FragmentPlayerBinding>(
             binding.compressorThresholdBar.value = v
             updateThresholdLabel()
             updateThresholdHint()
-            updateCurrentLabel()
             syncPresetButtons(matchingPresetButton())
         }
 
@@ -902,7 +885,6 @@ open class FullScreenPlayer : AbstractPlayerFragment<FragmentPlayerBinding>(
                 compressor.makeupGain = value
                 updateMakeupLabel()
                 updateMakeupHint()
-                updateCurrentLabel()
                 syncPresetButtons(matchingPresetButton())
             }
         }
@@ -912,7 +894,6 @@ open class FullScreenPlayer : AbstractPlayerFragment<FragmentPlayerBinding>(
             binding.compressorRatioBar.value = v
             updateMakeupLabel()
             updateMakeupHint()
-            updateCurrentLabel()
             syncPresetButtons(matchingPresetButton())
         }
         binding.ratioPlus.setOnClickListener {
@@ -921,7 +902,6 @@ open class FullScreenPlayer : AbstractPlayerFragment<FragmentPlayerBinding>(
             binding.compressorRatioBar.value = v
             updateMakeupLabel()
             updateMakeupHint()
-            updateCurrentLabel()
             syncPresetButtons(matchingPresetButton())
         }
 
