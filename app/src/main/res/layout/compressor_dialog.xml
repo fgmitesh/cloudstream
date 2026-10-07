@@ -24,21 +24,12 @@
     android:orientation="vertical"
     android:minWidth="300dp">
 
-    <!-- Current value display — updated programmatically -->
-    <TextView
-        android:id="@+id/compressor_current_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="center_horizontal"
-        android:textSize="20sp"
-        tools:text="Compressor: Off" />
-
     <!-- On / Off row — styled like speed preset buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="14dp"
+        android:layout_marginTop="14dp"
         android:layout_marginBottom="4dp"
         android:orientation="horizontal">
 
@@ -208,7 +199,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="14dp">
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="4dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/compressor_preset_light"
@@ -219,7 +212,7 @@
             android:nextFocusLeft="@id/compressor_preset_heavy"
             android:nextFocusRight="@id/compressor_preset_dialog"
             android:nextFocusUp="@id/ratio_minus"
-            android:nextFocusDown="@id/compressor_preset_light"
+            android:nextFocusDown="@id/apply_btt"
             android:text="@string/compressor_preset_light" />
 
         <com.google.android.material.button.MaterialButton
@@ -231,7 +224,7 @@
             android:nextFocusLeft="@id/compressor_preset_light"
             android:nextFocusRight="@id/compressor_preset_heavy"
             android:nextFocusUp="@id/compressor_ratio_bar"
-            android:nextFocusDown="@id/compressor_preset_dialog"
+            android:nextFocusDown="@id/reset_btt"
             android:text="@string/compressor_preset_dialog" />
 
         <com.google.android.material.button.MaterialButton
@@ -243,7 +236,7 @@
             android:nextFocusLeft="@id/compressor_preset_dialog"
             android:nextFocusRight="@id/compressor_preset_light"
             android:nextFocusUp="@id/ratio_plus"
-            android:nextFocusDown="@id/compressor_preset_heavy"
+            android:nextFocusDown="@id/cancel_btt"
             android:text="@string/compressor_preset_heavy" />
 
     </LinearLayout>
@@ -251,8 +244,8 @@
     <!-- Apply / Reset / Cancel — exactly like subtitle_offset.xml -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:paddingBottom="20dp"
+        android:layout_height="52dp"
+        android:paddingBottom="10dp"
         android:layout_gravity="bottom"
         android:gravity="bottom|end"
         android:orientation="horizontal">
